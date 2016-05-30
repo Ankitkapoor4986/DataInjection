@@ -35,6 +35,13 @@ public class User extends  BaseDateDTO{
 
 
 
+    public boolean getDefultUser(){
+        return Boolean.FALSE;
+    }
+
+
+
+
     public boolean isActive() {
         return Boolean.TRUE;
     }
@@ -46,7 +53,7 @@ public class User extends  BaseDateDTO{
     public String getInsert(){
 
         return new StringBuilder("Insert into User_ (userId,screenName,emailAddress,firstName,middleName,lastName")
-                .append(",companyId,password_,passwordEncrypted_,passwordReset,passwordModifiedDate,active_,languageId)")
+                .append(",companyId,password_,createDate,modifiedDate,passwordEncrypted,passwordReset,active_,defaultUser,languageId)")
                 .append("values ").append(Constants.OPEN_BRACKET)
                 .append(Constants.SINGLE_COTE).append(userId).append(Constants.SINGLE_COTE).append(Constants.COMMA)
                 .append(Constants.SINGLE_COTE).append(screenName).append(Constants.SINGLE_COTE).append(Constants.COMMA)
@@ -54,14 +61,14 @@ public class User extends  BaseDateDTO{
                 .append(Constants.SINGLE_COTE).append(firstName).append(Constants.SINGLE_COTE).append(Constants.COMMA)
                 .append(Constants.SINGLE_COTE).append(lastName).append(Constants.SINGLE_COTE).append(Constants.COMMA)
                 .append(Constants.SINGLE_COTE).append(middleName).append(Constants.SINGLE_COTE).append(Constants.COMMA)
-                .append(Constants.SINGLE_COTE).append(getCompanyId()).append(Constants.SINGLE_COTE)
-                .append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(getCompanyId()).append(Constants.SINGLE_COTE).append(Constants.COMMA)
                 .append(Constants.SINGLE_COTE).append(getPassword()).append(Constants.SINGLE_COTE).append(Constants.COMMA)
-                .append(Constants.SINGLE_COTE).append(isPasswordEncrypted()).append(Constants.SINGLE_COTE)
-                .append(Constants.COMMA)
-                .append(Constants.SINGLE_COTE).append(isPasswordReset()).append(Constants.SINGLE_COTE)
-                .append(Constants.COMMA)
-                .append(Constants.SINGLE_COTE).append(isActive()).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(getCreateDate()).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(getModifiedDate()).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(isPasswordEncrypted()).append(Constants.COMMA)
+                .append(isPasswordReset()).append(Constants.COMMA)
+                .append(isActive()).append(Constants.COMMA)
+                .append(getDefultUser()).append(Constants.COMMA)
                 .append(Constants.SINGLE_COTE).append(getLanguageId()).append(Constants.SINGLE_COTE)
                 .append(Constants.CLOSE_BRACKET)
                 .toString();
