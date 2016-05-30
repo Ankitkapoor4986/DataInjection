@@ -1,7 +1,5 @@
 package com.bb.injection.model;
 
-import java.time.LocalDateTime;
-
 /**
  * Created by ankit on 25/5/16.
  */
@@ -16,7 +14,7 @@ public class Address extends BaseDateDTO{
     private String city;
     private String zip;
     private Region region;
-    private Country country;
+
 
     public long getAddressId() {
         return addressId;
@@ -84,13 +82,7 @@ public class Address extends BaseDateDTO{
         this.region = region;
     }
 
-    public Country getCountry() {
-        return country;
-    }
 
-    public void setCountry(Country country) {
-        this.country = country;
-    }
 
 
 }
