@@ -1,5 +1,7 @@
 package com.bb.injection.model;
 
+import com.bb.injection.constants.Constants;
+
 import java.time.LocalDateTime;
 
 /**
@@ -8,62 +10,64 @@ import java.time.LocalDateTime;
 public class User extends  BaseDateDTO{
 
     private long userId;
-    private long companyId;
-    private String password;
-    private boolean passwordEncrypted;
-    private boolean passwordReset;
-    private LocalDateTime passwordModifiedDate;
     private String screenName;
     private String emailAddress;
-    private String languageId;
-    private String timeZoneId;
-    private boolean active;
     private String firstName;
     private String middleName;
     private String lastName;
 
 
     public long getCompanyId() {
-        return companyId;
+        return Constants.COMPANY_ID;
     }
-
-    public void setCompanyId(long companyId) {
-        this.companyId = companyId;
-    }
-
-
 
     public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        return Constants.GENERAL_PASSWORD;
     }
 
     public boolean isPasswordEncrypted() {
-        return passwordEncrypted;
-    }
-
-    public void setPasswordEncrypted(boolean passwordEncrypted) {
-        this.passwordEncrypted = passwordEncrypted;
+        return Boolean.FALSE;
     }
 
     public boolean isPasswordReset() {
-        return passwordReset;
+        return Boolean.FALSE;
     }
 
-    public void setPasswordReset(boolean passwordReset) {
-        this.passwordReset = passwordReset;
+
+
+    public boolean isActive() {
+        return Boolean.TRUE;
     }
 
-    public LocalDateTime getPasswordModifiedDate() {
-        return passwordModifiedDate;
+    public String getLanguageId() {
+        return Constants.US_LOCALE;
     }
 
-    public void setPasswordModifiedDate(LocalDateTime passwordModifiedDate) {
-        this.passwordModifiedDate = passwordModifiedDate;
+    public String getInsert(){
+
+        return new StringBuilder("Insert into User_ (userId,screenName,emailAddress,firstName,middleName,lastName")
+                .append(",companyId,password_,passwordEncrypted_,passwordReset,passwordModifiedDate,active_,languageId)")
+                .append("values ").append(Constants.OPEN_BRACKET)
+                .append(Constants.SINGLE_COTE).append(userId).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(screenName).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(emailAddress).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(firstName).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(lastName).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(middleName).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(getCompanyId()).append(Constants.SINGLE_COTE)
+                .append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(getPassword()).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(isPasswordEncrypted()).append(Constants.SINGLE_COTE)
+                .append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(isPasswordReset()).append(Constants.SINGLE_COTE)
+                .append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(isActive()).append(Constants.SINGLE_COTE).append(Constants.COMMA)
+                .append(Constants.SINGLE_COTE).append(getLanguageId()).append(Constants.SINGLE_COTE)
+                .append(Constants.CLOSE_BRACKET)
+                .toString();
     }
+
+
 
     public String getScreenName() {
         return screenName;
@@ -79,30 +83,6 @@ public class User extends  BaseDateDTO{
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-
-    public String getLanguageId() {
-        return languageId;
-    }
-
-    public void setLanguageId(String languageId) {
-        this.languageId = languageId;
-    }
-
-    public String getTimeZoneId() {
-        return timeZoneId;
-    }
-
-    public void setTimeZoneId(String timeZoneId) {
-        this.timeZoneId = timeZoneId;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public String getFirstName() {
@@ -129,7 +109,6 @@ public class User extends  BaseDateDTO{
         this.lastName = lastName;
     }
 
-
     public long getUserId() {
         return userId;
     }
@@ -137,4 +116,6 @@ public class User extends  BaseDateDTO{
     public void setUserId(long userId) {
         this.userId = userId;
     }
+
+
 }

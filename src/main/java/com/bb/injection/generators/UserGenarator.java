@@ -14,29 +14,26 @@ public class UserGenarator {
 
     public List<User> generate() {
         List<User> users = new ArrayList<User>();
-        for (int iter = 0; iter < Constants.TOTAL_ROWS; iter++) {
+        for (int iterator = 0; iterator < Constants.TOTAL_ROWS; iterator++) {
             User user = new User();
             user.setEmailAddress(new StringBuilder(Constants.COMMON_EMAIL_PREFIX_BEFORE_NO)
-                    .append(iter).append(Constants.COMMON_EMAIL_PREFIX_AFTER_NO).toString());
-            user.setActive(true);
-            user.setFirstName(Constants.TEST_STR.concat(String.valueOf(iter)));
-            user.setLastName(Constants.TEST_STR.concat(String.valueOf(iter)));
-            user.setMiddleName(Constants.TEST_STR.concat(String.valueOf(iter)));
-            if (iter % 2 == 0) {
+                    .append(iterator).append(Constants.COMMON_EMAIL_PREFIX_AFTER_NO).toString());
+
+            user.setFirstName(Constants.TEST_STR.concat(String.valueOf(iterator)));
+            user.setLastName(Constants.TEST_STR.concat(String.valueOf(iterator)));
+            user.setMiddleName(Constants.TEST_STR.concat(String.valueOf(iterator)));
+
                 user.setLanguageId(Constants.US_LOCALE);
-            } else {
-                user.setLanguageId(Constants.CANADA_LOCALE);
-            }
-            user.setPassword(Constants.TEST_STR);
-            user.setPasswordEncrypted(false);
-            user.setPasswordModifiedDate(LocalDateTime.now());
-            user.setPasswordReset(false);
-            user.setScreenName(Constants.TEST_STR.concat(String.valueOf(iter)));
-            user.setUserId(iter);
+
+            user.setScreenName(Constants.TEST_STR.concat(String.valueOf(iterator)));
+            user.setUserId(iterator);
             user.setCreateDate(LocalDateTime.now());
             user.setModifiedDate(LocalDateTime.now());
             users.add(user);
         }
         return users;
     }
+
+
+
 }

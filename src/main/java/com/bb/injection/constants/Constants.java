@@ -9,6 +9,13 @@ public interface Constants {
     String COMMON_EMAIL_PREFIX_AFTER_NO=".com";
     String TEST_STR ="test";
     String US_LOCALE="en_US";
-    String CANADA_LOCALE="en_CA";
+    String SINGLE_COTE="'";
+    long COMPANY_ID=10109;
+    String GENERAL_PASSWORD="1111";
+    String COMMA=",";
+    String OPEN_BRACKET="(";
+    String CLOSE_BRACKET=")";
+
+
 
 }
