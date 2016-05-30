@@ -1,6 +1,7 @@
-package com.bb.injection.generators;
+package com.bb.injection.Service;
 
 import com.bb.injection.constants.Constants;
+import com.bb.injection.dao.UserDao;
 import com.bb.injection.model.User;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,18 @@ import java.util.List;
 /**
  * Created by ankit on 26/5/16.
  */
-public class UserGenarator {
+public class UserService {
+
+    private static UserService userService=new UserService();
+    private UserService(){}
+    public static UserService getInstance(){
+        return userService;
+    }
+    private UserDao userDao=UserDao.getInstance();
+
+    public void insert(List<User> users){
+        userDao.insert(users);
+    }
 
     public List<User> generate() {
         List<User> users = new ArrayList<User>();
@@ -23,7 +35,7 @@ public class UserGenarator {
             user.setLastName(Constants.TEST_STR.concat(String.valueOf(iterator)));
             user.setMiddleName(Constants.TEST_STR.concat(String.valueOf(iterator)));
 
-                user.setLanguageId(Constants.US_LOCALE);
+
 
             user.setScreenName(Constants.TEST_STR.concat(String.valueOf(iterator)));
             user.setUserId(iterator);
@@ -33,6 +45,8 @@ public class UserGenarator {
         }
         return users;
     }
+
+
 
 
 
