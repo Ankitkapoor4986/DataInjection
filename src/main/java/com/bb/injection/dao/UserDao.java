@@ -3,7 +3,6 @@ package com.bb.injection.dao;
 import com.bb.injection.model.User;
 import com.bb.injection.util.ConnectionUtil;
 
-import java.security.PrivateKey;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
