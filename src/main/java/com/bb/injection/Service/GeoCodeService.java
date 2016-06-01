@@ -19,6 +19,10 @@ import static java.util.stream.Collectors.toList;
  */
 public class GeoCodeService {
 
+    private static GeoCodeService geoCodeService=new GeoCodeService();
+    public static GeoCodeService getInstance(){
+        return geoCodeService;
+    }
     private  String getResponseFromService(String query)
             throws IOException {
 
