@@ -24,6 +24,7 @@ public class UserDao {
 
     public void insert(List<User> users) {
         List<String> userInserts = users.stream().map(User::getInsert).collect(Collectors.toList());
+
         Connection connection = ConnectionUtil.getConnection();
         Statement statement=null;
         try {
@@ -34,9 +35,7 @@ public class UserDao {
                 statement.addBatch(query);
             }
             statement.executeBatch();
-//            for (String query : userInserts) {
-//                statement.execute(query);
-//           }
+
         }catch (SQLException e){
             e.printStackTrace();
         }
