@@ -1,10 +1,15 @@
 package com.bb.injection.model;
 
+import com.bb.injection.constants.Constants;
+import com.bb.injection.util.GeneralUtil;
+import com.bb.injection.util.PropertyUtil;
+
 /**
  * Created by ankit on 25/5/16.
  */
 public class Address extends BaseDateDTO{
 
+    public static final String GOOGLE_API_STR = PropertyUtil.getProperty(PropertyUtil.GOOGLE_API);
     private long addressId;
     private User user;
 
@@ -83,6 +88,50 @@ public class Address extends BaseDateDTO{
     }
 
 
+
+    public String getStrFromLocation() {
+
+        StringBuilder addressStr = new StringBuilder(GOOGLE_API_STR);
+
+        if (GeneralUtil.isNotNullAndNotEmpity(this.getStreet1())) {
+            addressStr.append(
+                    GeneralUtil.spaceTOPercentageReplacer(this
+                            .getStreet1())).append(Constants.COMMA);
+        }
+        if (GeneralUtil.isNotNullAndNotEmpity(this.getStreet2())) {
+            addressStr.append(
+                    GeneralUtil.spaceTOPercentageReplacer(this
+                            .getStreet2())).append(Constants.COMMA);
+        }
+        if (GeneralUtil.isNotNullAndNotEmpity(this.getCity())) {
+            addressStr.append(
+                    GeneralUtil.spaceTOPercentageReplacer(this
+                            .getCity())).append(Constants.COMMA);
+        }
+        if (GeneralUtil.isNotNullAndNotEmpity(this.getRegion()
+                .getName())) {
+            addressStr.append(
+                    GeneralUtil.spaceTOPercentageReplacer(this
+                            .getRegion().getName())).append(
+                    Constants.COMMA);
+        }
+        if (GeneralUtil.isNotNullAndNotEmpity(this.getRegion()
+                .getCountry().getName())) {
+            addressStr.append(
+                    GeneralUtil.spaceTOPercentageReplacer(this
+                            .getRegion().getCountry().getName())).append(
+                    Constants.COMMA);
+        }
+        if (GeneralUtil.isNotNullAndNotEmpity(this.getZip())) {
+            addressStr.append(GeneralUtil.spaceTOPercentageReplacer(this
+                    .getZip()));
+        }
+
+        return addressStr.toString();
+
+
+
+    }
 
 
 }

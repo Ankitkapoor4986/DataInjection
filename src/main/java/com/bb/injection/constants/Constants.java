@@ -16,6 +16,13 @@ public interface Constants {
     String OPEN_BRACKET="(";
     String CLOSE_BRACKET=")";
     String ADDRESS_TAB_NAME=" Address ";
+    String SPACE=" ";
+    String PERCENTAGE_20 ="%20";
+    String EMPTY ="";
+
+    interface PropertyConst{
+
+    }
 
 
 
