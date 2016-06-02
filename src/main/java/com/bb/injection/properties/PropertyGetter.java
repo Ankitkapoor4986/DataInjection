@@ -19,8 +19,7 @@ public class PropertyGetter {
 
     private PropertyGetter() {
         prop = new Properties();
-        try (InputStream input = new FileInputStream(App.PATH.concat(File.separator).
-                concat("config.properties"))) {
+        try (InputStream input = new FileInputStream(App.PATH)) {
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
