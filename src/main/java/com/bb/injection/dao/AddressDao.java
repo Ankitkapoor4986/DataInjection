@@ -6,6 +6,7 @@ import com.bb.injection.model.Country;
 import com.bb.injection.model.Region;
 import com.bb.injection.model.User;
 import com.bb.injection.util.ConnectionUtil;
+import com.bb.injection.util.PropertyUtil;
 
 import javax.naming.spi.DirStateFactory;
 import java.sql.*;
@@ -64,11 +65,14 @@ public class AddressDao {
     }
         //TODO offset in JDBC
     public List<Address> getAddresses(){
+
+        int startingPoint= Integer.parseInt(PropertyUtil.getProperty(PropertyUtil.ADDRESS_USER_COUNT_KEY));
         List<Address> addresses=new ArrayList<>();
         StringBuilder query=new StringBuilder();
+        PropertyUtil.getProperty(PropertyUtil.ADDRESS_USER_COUNT_KEY);
         query.append("select addressId,userId,street1,street2,street3,city,zip,r.name as regionName,c.name as countryName");
-        query.append(" from Address a join Region r on a.regionId=r.regionId join Country c on c.countryId=r.countryId");
-        query.append(" limit ").append(Constants.TOTAL_HITS_ALLOWED);
+        query.append(" from Address a join Region r on a.regionId=r.regionId join Country c on c.countryId=r.countryId ");
+        query.append(" where a.userId between  ").append(startingPoint).append(" and ").append(startingPoint + Constants.TOTAL_HITS_ALLOWED);
 
         try(Connection connection=ConnectionUtil.getConnection();
             Statement   statement = connection.createStatement();
