@@ -20,10 +20,6 @@ public interface Constants {
     String PERCENTAGE_20 ="%20";
     String EMPTY ="";
 
-    interface PropertyConst{
-
-    }
-
 
 
 }
