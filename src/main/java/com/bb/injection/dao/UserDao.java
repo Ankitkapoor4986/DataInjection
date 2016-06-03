@@ -14,35 +14,41 @@ import java.util.stream.Collectors;
  */
 public class UserDao {
 
-    private UserDao(){}
+    private UserDao() {
+    }
 
-    private static UserDao userDao=new UserDao();
+    private static UserDao userDao = new UserDao();
 
-    public static UserDao getInstance(){
+    public static UserDao getInstance() {
         return userDao;
     }
 
     public void insert(List<User> users) {
         List<String> userInserts = users.stream().map(User::getInsert).collect(Collectors.toList());
 
-        Connection connection = ConnectionUtil.getConnection();
-        Statement statement=null;
-        try {
-             statement = connection.createStatement();
+
+        try (Connection connection = ConnectionUtil.getConnection();
+             Statement statement = connection.createStatement();
+        ) {
+
             System.out.println("Adding queries to batch");
-            for (String query : userInserts) {
-                System.out.println(query);
-                statement.addBatch(query);
-            }
+
+            userInserts.stream().forEach(s -> {
+                        System.out.println(s);
+
+                        try {
+                            statement.addBatch(s);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+            );
             statement.executeBatch();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            ConnectionUtil.closeStatement(statement);
-            ConnectionUtil.closeConnection(connection);
-        }
+
 
     }
 }
