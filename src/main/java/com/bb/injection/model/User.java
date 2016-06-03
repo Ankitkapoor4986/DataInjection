@@ -39,8 +39,17 @@ public class User extends  BaseDateDTO{
         return Boolean.FALSE;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", screenName='" + screenName + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 
     public boolean isActive() {
         return Boolean.TRUE;

@@ -12,6 +12,20 @@ public class Country {
     private String idd;
     private boolean active;
 
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "CountryId=" + CountryId +
+                ", name='" + name + '\'' +
+                ", a2='" + a2 + '\'' +
+                ", a3='" + a3 + '\'' +
+                ", number='" + number + '\'' +
+                ", idd='" + idd + '\'' +
+                ", active=" + active +
+                '}';
+    }
+
     public String getIdd() {
         return idd;
     }

@@ -7,6 +7,18 @@ public class Region {
     private long regionId;
     private Country country;
     private String regionCode;
+
+    @Override
+    public String toString() {
+        return "Region{" +
+                "regionId=" + regionId +
+                ", country=" + country +
+                ", regionCode='" + regionCode + '\'' +
+                ", name='" + name + '\'' +
+                ", active=" + active +
+                '}';
+    }
+
     private String name;
     private boolean active;
 

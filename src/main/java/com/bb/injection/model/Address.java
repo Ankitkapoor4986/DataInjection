@@ -88,8 +88,21 @@ public class Address extends BaseDateDTO{
     }
 
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "addressId=" + addressId +
+                ", user=" + user +
+                ", Street1='" + Street1 + '\'' +
+                ", Street2='" + Street2 + '\'' +
+                ", Street3='" + Street3 + '\'' +
+                ", city='" + city + '\'' +
+                ", zip='" + zip + '\'' +
+                ", region=" + region +
+                '}';
+    }
 
-    public String getStrFromLocation() {
+    public String getApiStrFromLocation() {
 
         StringBuilder addressStr = new StringBuilder(GOOGLE_API_STR);
 
@@ -126,6 +139,7 @@ public class Address extends BaseDateDTO{
             addressStr.append(GeneralUtil.spaceTOPercentageReplacer(this
                     .getZip()));
         }
+
 
         return addressStr.toString();
 
