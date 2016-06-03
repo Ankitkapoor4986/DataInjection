@@ -11,6 +11,7 @@ public class PropertyUtil {
     public static final String UPDATE_ADDRESS ="update_address";
     public static final  String ADDRESS_USER_COUNT_KEY="address_user_count";
     public static final  String GOOGLE_API ="api";
+    public static final String HITS_WANTED ="total_hits_wanted";
 
 
     public static String getProperty(String key){
