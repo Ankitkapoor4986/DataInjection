@@ -7,6 +7,7 @@ import com.bb.injection.util.ConnectionUtil;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +22,8 @@ public class TBBBuddyGroupDao {
         return buddyGroupDao;
     }
 
-    public void insert(List<TBBBuddyGroup> users) {
-        List<String> buddyGroupInsertsQueries = users.stream().map(TBBBuddyGroup::getInsert).collect(Collectors.toList());
+    public void insert(List<TBBBuddyGroup> tbbBuddyGroups) {
+        List<String> buddyGroupInsertsQueries = tbbBuddyGroups.stream().map(TBBBuddyGroup::getInsert).collect(Collectors.toList());
 
 
         try (Connection connection = ConnectionUtil.getConnection();
@@ -49,4 +50,11 @@ public class TBBBuddyGroupDao {
 
 
     }
+
+    public void insert(TBBBuddyGroup tbbBuddyGroup){
+        List<TBBBuddyGroup> tbbBuddyGroups=new ArrayList<>();
+        tbbBuddyGroups.add(tbbBuddyGroup);
+        insert(tbbBuddyGroups);
+    }
+
 }

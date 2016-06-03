@@ -20,4 +20,8 @@ public class TBBBuddyGroupService {
     public void insert(List<TBBBuddyGroup> tbbBuddyGroups){
         tbbBuddyGroupDao.insert(tbbBuddyGroups);
     }
+
+    public void insert(TBBBuddyGroup tbbBuddyGroup){
+        tbbBuddyGroupDao.insert(tbbBuddyGroup);
+    }
 }
