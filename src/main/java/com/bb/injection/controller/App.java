@@ -23,9 +23,10 @@ public class App {
 
 
         //TODO improve address code generation
-        //TODO Erroor
-        //TODO stream google api hit
+        //TODO Error in GOOGLE API
+        //
         //TODO Check status in API
+        //TODO Convert GeoCoding loop into iterator
 
         PATH = Optional.of(args[0]).get();
 
@@ -41,9 +42,8 @@ public class App {
         }
         List<Address> addresses = addressService.getAddress();
         GeoCodeService geoCodeService = GeoCodeService.getInstance();
-        List<TBBBuddyGroup> tbbGroupFromAddress = geoCodeService.getTBBGroupFromAddress(addresses);
-        TBBBuddyGroupService tbbBuddyGroup = TBBBuddyGroupService.getInstance();
-        tbbBuddyGroup.insert(tbbGroupFromAddress);
+         geoCodeService.getTBBGroupFromAddress(addresses);
+
 
 
     }

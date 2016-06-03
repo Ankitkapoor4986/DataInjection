@@ -11,8 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.Optional;
 
 /**
  * Created by ankit on 31/5/16.
@@ -20,6 +19,8 @@ import static java.util.stream.Collectors.toList;
 public class GeoCodeService {
 
     private static GeoCodeService geoCodeService=new GeoCodeService();
+    private static TBBBuddyGroupService tbbBuddyGroupService =TBBBuddyGroupService.getInstance();
+
     public static GeoCodeService getInstance(){
         return geoCodeService;
     }
@@ -45,12 +46,12 @@ public class GeoCodeService {
 
     }
 
-    private TBBBuddyGroup getTbbBuddyGroupFromResponse(String jsonStr){
+    private Optional<TBBBuddyGroup> getTbbBuddyGroupFromResponse(String jsonStr, Address address){
         TBBBuddyGroup tbbBuddyGroup=new TBBBuddyGroup();
         JSONObject JsonObject = new JSONObject(jsonStr);
         JSONArray resultJsonArray=  JsonObject.getJSONArray("results");
         if(resultJsonArray.isNull(0)){
-            //TODO throw an exception
+            return Optional.empty();
         }
         else{
             JSONObject resultJsonObj= (JSONObject) resultJsonArray.get(0);
@@ -58,22 +59,44 @@ public class GeoCodeService {
             tbbBuddyGroup.setLat(Double.parseDouble(locationJsonObj.get("lat").toString()));
             tbbBuddyGroup.setLng(Double.parseDouble(locationJsonObj.get("lng").toString()));
         }
+        tbbBuddyGroup.setUser(address.getUser());
 
-        return tbbBuddyGroup;
+        return Optional.ofNullable(tbbBuddyGroup);
 
     }
 
 
-     public List<TBBBuddyGroup> getTBBGroupFromAddress(List<Address> addressList){
-                return  addressList.stream().map(Address::getStrFromLocation).map(s -> {
-                     try {
-                         return getResponseFromService(s);
-                     } catch (IOException e) {
-                         e.printStackTrace();
-                         return null;
-                     }
-                 }).map(s-> getTbbBuddyGroupFromResponse(s))
-                 .collect(toList());
+     public void getTBBGroupFromAddress(List<Address> addressList){
+
+         boolean exceptionOccured=false;
+         for (int iterator=0;iterator<addressList.size() && !exceptionOccured;iterator++) {
+             Address address=addressList.get(iterator);
+             String apiString=address.getApiStrFromLocation();
+             System.out.println("*********API String is **************");
+             System.out.println(apiString);
+             System.out.print(address);
+
+             try {
+                String jsonStr= getResponseFromService(apiString);
+                 System.out.println("JSON STR IS");
+                 System.out.println(jsonStr);
+                Optional<TBBBuddyGroup> tbbGroup= getTbbBuddyGroupFromResponse(jsonStr,address );
+                 if (!tbbGroup.equals(Optional.empty())){
+                     tbbBuddyGroupService.insert(tbbGroup.get());
+                 }
+
+             } catch (IOException e) {
+
+                 e.printStackTrace();
+                 exceptionOccured=true;
+
+             }
+         }
+
+
+
+
+
      }
 
 
