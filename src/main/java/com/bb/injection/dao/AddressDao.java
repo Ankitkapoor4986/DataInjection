@@ -67,12 +67,14 @@ public class AddressDao {
     public List<Address> getAddresses(){
 
         int startingPoint= Integer.parseInt(PropertyUtil.getProperty(PropertyUtil.ADDRESS_USER_COUNT_KEY));
+        int count=Integer.parseInt(PropertyUtil.getProperty(PropertyUtil.HITS_WANTED));
         List<Address> addresses=new ArrayList<>();
         StringBuilder query=new StringBuilder();
         PropertyUtil.getProperty(PropertyUtil.ADDRESS_USER_COUNT_KEY);
         query.append("select addressId,userId,street1,street2,street3,city,zip,r.name as regionName,c.name as countryName");
         query.append(" from Address a join Region r on a.regionId=r.regionId join Country c on c.countryId=r.countryId ");
-        query.append(" where a.userId between  ").append(startingPoint).append(" and ").append(startingPoint + Constants.TOTAL_HITS_ALLOWED);
+        query.append(" where a.userId between  ").append(startingPoint).append(" and ")
+                .append(startingPoint +count);
 
         try(Connection connection=ConnectionUtil.getConnection();
             Statement   statement = connection.createStatement();
