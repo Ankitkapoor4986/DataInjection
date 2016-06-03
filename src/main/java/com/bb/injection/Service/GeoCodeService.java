@@ -1,5 +1,6 @@
 package com.bb.injection.Service;
 
+import com.bb.injection.constants.Constants;
 import com.bb.injection.model.Address;
 import com.bb.injection.model.TBBBuddyGroup;
 import org.json.JSONArray;
@@ -69,7 +70,9 @@ public class GeoCodeService {
      public void getTBBGroupFromAddress(List<Address> addressList){
 
          boolean exceptionOccured=false;
-         for (int iterator=0;iterator<addressList.size() && !exceptionOccured;iterator++) {
+         int exceptionCount=0;
+         for (int iterator = 0; (iterator < addressList.size()) && (!exceptionOccured ||
+                 (exceptionCount <= Constants.NO_OF_EXCEPTION_ALLOWED)); iterator++) {
              Address address=addressList.get(iterator);
              String apiString=address.getApiStrFromLocation();
              System.out.println("*********API String is **************");
@@ -86,7 +89,7 @@ public class GeoCodeService {
                  }
 
              } catch (IOException e) {
-
+                 exceptionCount++;
                  e.printStackTrace();
                  exceptionOccured=true;
 

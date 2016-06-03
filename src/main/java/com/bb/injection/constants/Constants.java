@@ -19,7 +19,7 @@ public interface Constants {
     String SPACE=" ";
     String PERCENTAGE_20 ="%20";
     String EMPTY ="";
-
+    int NO_OF_EXCEPTION_ALLOWED=3;
 
 
 }
